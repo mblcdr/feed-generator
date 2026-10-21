@@ -1,0 +1,23 @@
+# Same as compose.yaml but pulls the prebuilt image instead of building it (use this one for Portainer). Replace OWNER/REPO below, or set FEED_IMAGE.
+services:
+  feed-generator:
+    # image is built by .github/workflows/docker.yml; set FEED_IMAGE if your account or repository name differs
+    image: ${FEED_IMAGE:-ghcr.io/OWNER/REPO:latest}
+    container_name: feed-generator
+    init: true # reaps Chromium's child processes
+    restart: unless-stopped
+    ports:
+      # Reachable from the local network by default (no login: only use this on a trusted network, and don't forward the port
+      # on your router). For this computer only set BIND_ADDR=127.0.0.1 in a .env file.
+      - "${BIND_ADDR:-0.0.0.0}:${HOST_PORT:-5959}:3000"
+    environment:
+      FEED_LANG: ${FEED_LANG:-} # Accept-Language of the headless browser, e.g. nl-NL (default en-US)
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-lan} # "lan" = any local-network address or name; add more, e.g. "lan,example.com:3000" (or "*")
+      TZ: ${TZ:-UTC}
+    volumes:
+      - feed-data:/data # feeds, settings and cached images
+    shm_size: 512m
+    # mem_limit: 1g # optional: Chromium can use a lot of memory on heavy pages
+
+volumes:
+  feed-data:
