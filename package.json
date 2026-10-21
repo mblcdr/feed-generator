@@ -1,6 +1,6 @@
 {
   "name": "feed-generator",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Turn online store listing pages into a local, RSS-like feed of items.",
   "main": "server.js",
   "scripts": {

@@ -41,6 +41,10 @@ docker compose logs -f            # follow the log
 docker compose down               # stop (data is kept in the `feed-data` volume)
 ```
 
+* **Versions / pinning**: pushing a git tag such as `v1.2.0` publishes `ghcr.io/<owner>/<repo>` with the tags `1.2.0` (immutable), `1.2` (latest patch of that minor), `1` (latest of that major, not for `0.x`) and `sha-<commit>`;
+  `latest` follows the `main` branch. To lock a version set `FEED_IMAGE=ghcr.io/<owner>/<repo>:1.2.0` (or write it in `.env`) and upgrade by changing the tag; the data volume is kept. Release with `git tag v1.2.0 && git push --tags`
+  (keep `version` in `package.json` in step).
+* **Website**: `site/` is a static GitHub Pages site (highlights and setup guide) deployed by `.github/workflows/pages.yml`; enable it once under Settings → Pages → Source: *GitHub Actions*.
 * **Prebuilt image / Portainer**: `.github/workflows/docker.yml` builds an Intel + ARM image on every push to `main` (and `v*` tags) and pushes it to `ghcr.io/<owner>/<repo>`.
   `compose.ghcr.yaml` is the same stack but pulls that image: replace `OWNER/REPO` in it (lowercase) or set `FEED_IMAGE`. In Portainer use *Stacks → Add stack → Repository* with compose path
   `compose.ghcr.yaml` and set `HOST_PORT` etc. under *Environment variables*. Make the package public (GitHub → Packages → Package settings), or add ghcr.io as a registry in Portainer with a token.

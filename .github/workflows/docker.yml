@@ -1,5 +1,6 @@
 # Builds the Docker image (Intel + ARM) and pushes it to the GitHub Container Registry: ghcr.io/<owner>/<repo>
-# On every push to main (tag "latest"), and on version tags such as v1.2.0 (tags "1.2.0", "1.2", "latest").
+# On every push to main (tags "latest" and "sha-<commit>"), and on version tags such as v1.2.0 (tags "1.2.0", "1.2", "1", "sha-<commit>").
+# "latest" is only moved by main, so a release tag never silently changes what people pinned.
 name: Docker image
 
 on:
@@ -32,6 +33,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/v0.') }}
             type=sha
       - uses: docker/build-push-action@v6
         with:
