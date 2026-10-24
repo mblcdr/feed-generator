@@ -1,5 +1,5 @@
 # Feed Generator - light image: Node + Alpine's Chromium (works on amd64 and arm64).
-FROM node:22-alpine
+FROM node:26-alpine
 
 # Chromium renders the pages. Puppeteer's own Chrome download is skipped (it has no Linux arm64 build).
 RUN apk add --no-cache chromium ttf-freefont \
