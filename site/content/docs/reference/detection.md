@@ -1,6 +1,12 @@
-# Detection and extraction
-
-[← Back to the README](../README.md)
+---
+title: "Detection and extraction"
+description: "How Feed Generator finds the repeating items on a page, extracts their fields and matches wanted phrases fuzzily."
+summary: ""
+slug: "detection"
+draft: false
+weight: 20
+toc: true
+---
 
 ## Detection algorithm (`lib/analyzer.js`)
 

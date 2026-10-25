@@ -1,0 +1,28 @@
+{
+  "name": "feed-generator-site",
+  "private": true,
+  "description": "Website and documentation for Feed Generator (Hugo + Doks)",
+  "license": "MIT",
+  "scripts": {
+    "dev": "hugo server --disableFastRender --noHTTPCache",
+    "build": "hugo --minify --gc"
+  },
+  "dependencies": {
+    "@tabler/icons": "^3.48.0",
+    "@thulite/doks-core": "^1.9.4",
+    "@thulite/images": "^3.3.4",
+    "@thulite/inline-svg": "^1.2.2",
+    "@thulite/seo": "^2.4.4",
+    "thulite": "^3.0.3"
+  },
+  "overrides": {
+    "minimatch": "^10.2.2",
+    "glob": "^13.0.6"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.106.1"
+  }
+}

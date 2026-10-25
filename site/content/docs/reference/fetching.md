@@ -1,6 +1,12 @@
-# Fetching and paging
-
-[← Back to the README](../README.md)
+---
+title: "Fetching and paging"
+description: "The headless-browser fetch sequence and how page-number templates are inferred from two addresses."
+summary: ""
+slug: "fetching"
+draft: false
+weight: 30
+toc: true
+---
 
 ## Fetching (`lib/fetcher.js`)
 

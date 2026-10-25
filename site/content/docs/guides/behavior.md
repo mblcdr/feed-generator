@@ -1,6 +1,12 @@
-# Behaviour (user-visible requirements)
-
-[← Back to the README](../README.md)
+---
+title: "Behaviour"
+description: "Everything Feed Generator does from the user's point of view: adding feeds, wanted and ignored phrases, stars, paging, sync and filters."
+summary: ""
+slug: "behavior"
+draft: false
+weight: 10
+toc: true
+---
 
 1. **Add feed screen**: fields *Web address*, *Name*, optional *Number of items* and optional *Address of the second page* (see Paging, item 15).
    Scheme-less input defaults to `https://` and falls back to `http://` if the site doesn't speak TLS.
@@ -74,7 +80,7 @@
 17. **Settings & sync** (cog button next to *Add feed*, `#/settings`): the page lists the **other instances** to sync with. Enter `host:port` (scheme defaults to `http://`); more than one
     can be added, and adding B on A is enough (B learns A's data from the same request). The synced configuration is: the feeds (name, address, number of items, paging, **pattern**), each feed's
     wanted / ignored lists and settings (max items, auto refresh), and the global wanted / ignored lists. **Items and stars are not synced**; a feed that arrives on an instance is created empty
-    and refreshed in the background. Each peer shows when it was last synced or why that failed. The other instance has to accept the `Host` it is called with (`ALLOWED_HOSTS`, see the Security notes in the README;
+    and refreshed in the background. Each peer shows when it was last synced or why that failed. The other instance has to accept the `Host` it is called with (`ALLOWED_HOSTS`, see the Security notes in the README on GitHub;
     `localhost` works as is). Existing feeds that were created separately on two instances are different feeds and both end up on both (delete the duplicates once).
 18. **Minimum discount** (**Discount** chip, only shown for feeds where a discount is recognized or a filter is set): enter 1-100 to show only items discounted at least that much; **Remove filter** brings
     the rest back. The discount is `1 - price / oldPrice` when both are known, else the percentage of a badge such as `-20%` / `20% off` (`public/discount.js`, shared by browser and server). Items

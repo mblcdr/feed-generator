@@ -9,3 +9,5 @@ Dockerfile
 compose.yaml
 .dockerignore
 README.md
+site
+.github

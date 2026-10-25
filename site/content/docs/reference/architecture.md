@@ -1,6 +1,12 @@
-# Architecture
-
-[← Back to the README](../README.md)
+---
+title: "Architecture"
+description: "Module overview, request flow, JSON API, data model, sync and contributor notes for Feed Generator."
+summary: ""
+slug: "architecture"
+draft: false
+weight: 10
+toc: true
+---
 
 ```
 server.js              HTTP server: static files, JSON API, /img image proxy, Host/Origin guard
@@ -31,7 +37,9 @@ Add feed submit ──POST /api/analyze {url, expectedCount}
  Update / auto-refresh ──POST /api/feeds/:id/refresh → fetch page, apply stored selector, merge items
 ```
 
-## API (all JSON; errors are `{ "error": "message" }` with an HTTP status)
+## API
+
+All routes use JSON. Errors are `{ "error": "message" }` with an HTTP status.
 
 | Route | Description |
 |---|---|

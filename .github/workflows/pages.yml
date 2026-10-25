@@ -1,4 +1,4 @@
-# Publishes the static site in site/ to GitHub Pages on every push to main that touches it.
+# Builds the Hugo + Doks site in site/ and publishes it to GitHub Pages on every push to main that touches it.
 # One-time setup: repository Settings -> Pages -> Source: "GitHub Actions".
 name: GitHub Pages
 
@@ -22,15 +22,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fill in the repository name
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.168.0'
+          extended: true
+      - id: pages
+        uses: actions/configure-pages@v5
+      - name: Build the site
+        working-directory: site
         run: |
-          repo="${GITHUB_REPOSITORY}"
-          lower="$(echo "$repo" | tr '[:upper:]' '[:lower:]')"
-          sed -i -e "s#__REPO_LC__#${lower}#g" -e "s#__NAME__#${repo##*/}#g" -e "s#__REPO__#${repo}#g" site/index.html
-      - uses: actions/configure-pages@v5
+          npm ci
+          npm run build -- --baseURL "${{ steps.pages.outputs.base_url }}/"
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: site/public
   deploy:
     needs: build
     runs-on: ubuntu-latest
